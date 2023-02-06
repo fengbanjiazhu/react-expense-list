@@ -5,11 +5,6 @@ export default function ExpenseFrom(props) {
   const [inputTitle, setInputTitle] = useState("");
   const [inputAmount, setInputAmount] = useState("");
   const [inputDate, setInputDate] = useState("");
-  // const [inputData, setInputData] = useState({
-  //   title: "",
-  //   amount: "",
-  //   date: "",
-  // });
 
   const titleChangeHandler = function (e) {
     // don't use:
@@ -45,6 +40,8 @@ export default function ExpenseFrom(props) {
     setInputTitle("");
     setInputAmount("");
     setInputDate("");
+
+    props.onChangeStatus();
   };
 
   return (
@@ -64,6 +61,7 @@ export default function ExpenseFrom(props) {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button onClick={props.onChangeStatus}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
