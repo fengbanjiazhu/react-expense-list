@@ -3,14 +3,21 @@ import "./ExpenseItem.css";
 import ExpenseDate from "./ExpenseDate";
 import Card from "../UI/Card";
 
-function ExpenseItem(data) {
+function ExpenseItem(props) {
+  const deleteExpenses = function (e) {
+    props.onDelData(props.data.id);
+  };
+
   return (
     <Card className="expense-item">
-      <ExpenseDate date={data.data.date}></ExpenseDate>
-      <h2>{data.data.title}</h2>
+      <ExpenseDate date={props.data.date}></ExpenseDate>
+      <h2>{props.data.title}</h2>
       <div className="expense-item__description">
-        <div className="expense-item__price">${data.data.amount}</div>
+        <div className="expense-item__price">${props.data.amount}</div>
       </div>
+      <button className="expense-item__deleBtn" onClick={deleteExpenses}>
+        Delete
+      </button>
     </Card>
   );
 }

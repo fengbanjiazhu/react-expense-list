@@ -2,7 +2,6 @@ import React from "react";
 import Chart from "../Chart/Chart";
 
 export default function ExpensesChart(props) {
-  console.log(props);
   const chartDataPoint = [
     { label: "Jan", value: 0 },
     { label: "Feb", value: 0 },
@@ -22,7 +21,6 @@ export default function ExpensesChart(props) {
     const expenseMonth = expense.date.getMonth();
     chartDataPoint[expenseMonth].value += expense.amount;
   }
-  console.log(chartDataPoint);
 
   return <Chart dataPoints={chartDataPoint}></Chart>;
 }

@@ -7,15 +7,23 @@ import ExpensesChart from "./ExpensesChart";
 import Card from "../UI/Card";
 
 function Expenses(props) {
-  const [filterYear, setFilterYear] = useState("2023");
+  const [filterYear, setFilterYear] = useState("");
 
   const filterHandler = function (selectYear) {
     setFilterYear(selectYear);
   };
 
   const filteredExpenses = props.data.filter((expense) => {
+    if (filterYear === "") return expense;
     return expense.date.getFullYear().toString() === filterYear;
   });
+
+  const changeData = function (id) {
+    let data = props.data;
+    let delIndex = data.findIndex((el) => el.id === id);
+    data.splice(delIndex, 1);
+    props.onChangeExpense(data);
+  };
 
   return (
     <Card className="expenses">
@@ -25,7 +33,7 @@ function Expenses(props) {
         <p className="expenses__fallback">No expenses found.</p>
       ) : (
         filteredExpenses.map((el, index) => {
-          return <ExpenseItem key={filteredExpenses[index].id} data={filteredExpenses[index]} />;
+          return <ExpenseItem onDelData={changeData} key={filteredExpenses[index].id} data={filteredExpenses[index]} />;
         })
       )}
       <div></div>
